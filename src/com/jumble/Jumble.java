@@ -14,6 +14,13 @@ import java.util.Set;
 public class Jumble {
 	private static Set<String> generatedWordset = new HashSet<String>();
 
+	/**
+	 * Function to read an input file and generate a word set containing all the
+	 * valid words from the file
+	 * 
+	 * @param fileName
+	 * @return Set<String> a set of words from the given file
+	 */
 	public Set<String> readFile(String fileName) {
 		Set<String> wordSet = new HashSet<String>();
 		try {
@@ -32,6 +39,12 @@ public class Jumble {
 		return wordSet;
 	}
 
+	/**
+	 * Function to get the jumbled words for the given input
+	 * 
+	 * @param result
+	 * @param input
+	 */
 	public void getJumbledWords(String result, String input) {
 		if (input.length() == 0) {
 			return;
@@ -44,6 +57,13 @@ public class Jumble {
 		}
 	}
 
+	/**
+	 * Function to get the valid words from the generated combinations of words
+	 * by comparing from the global file
+	 * 
+	 * @param wordSet
+	 * @return
+	 */
 	public List<String> getValidWords(Set<String> wordSet) {
 		List<String> validWords = new ArrayList<>();
 		Iterator<String> generatedWordsIterator = generatedWordset.iterator();
@@ -58,18 +78,43 @@ public class Jumble {
 
 	public static void main(String[] args) {
 		Jumble myJumbler = new Jumble();
-		Scanner userInput = new Scanner(System.in);
-		System.out.println("Enter your input String:");
-		String input = userInput.nextLine();
-		userInput.close();
-		String result = "";
-		Set<String> wordSet = myJumbler.readFile("F:\\Words.txt");
-		myJumbler.getJumbledWords(result, input);
-		List<String> validWordsList = myJumbler.getValidWords(wordSet);
-		System.out.println("\nThe valid words are:");
-		Iterator<String> validWordsIterator=validWordsList.iterator();
-		while(validWordsIterator.hasNext()){
-			System.out.println(validWordsIterator.next());
+		//Check for proper number of arguments
+		if (args.length != 1) {
+			System.out.println("The number of arguments are not valid");
+			System.exit(0);
+		} else {
+			Scanner userInput = new Scanner(System.in);
+			System.out.println("Enter your input String:");
+			String input = userInput.nextLine();
+			//Check if the input is not empty or null
+			if (input.equalsIgnoreCase("") || input == null) {
+				System.out.println("Not a valid input");
+				System.exit(0);
+			} else {
+				//Check if the input is not a digit
+				for (int i = 0; i < input.length(); i++) {
+					if (((input.charAt(i) < 'a' && input.charAt(i) > 'z') || (input
+							.charAt(i) < 'A' && input.charAt(i) > 'Z'))) {
+						System.out.println("Not a valid input");
+						System.exit(0);
+					}
+				}
+
+			}
+			//If valid input
+			userInput.close();
+			String result = "";
+			Set<String> wordSet = myJumbler.readFile(args[0]);
+			myJumbler.getJumbledWords(result, input);
+			List<String> validWordsList = myJumbler.getValidWords(wordSet);
+			if (!validWordsList.isEmpty()) {
+				System.out.println("\nThe valid words are:");
+				Iterator<String> validWordsIterator = validWordsList.iterator();
+				while (validWordsIterator.hasNext()) {
+					System.out.println(validWordsIterator.next());
+				}
+			}
+
 		}
 
 	}
