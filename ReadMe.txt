@@ -1,7 +1,7 @@
 								ReadMe
 
 1.The the main program is Jumble.java.
-2.The program takes the wordlist file as input and reads the words line by line from the file. It generates a Set containing all the valid words. 
+2.The program takes the wordlist file(absolute path should be provided) as input and reads the words line by line from the file. It generates a Set containing all the valid words. 
 The program generates combinations of all the words of the input and compares it with the given wordlist.
 3.The output is the set of valid words after comparing the words from the word list provided.
 
