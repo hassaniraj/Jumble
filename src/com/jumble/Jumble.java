@@ -78,7 +78,7 @@ public class Jumble {
 
 	public static void main(String[] args) {
 		Jumble myJumbler = new Jumble();
-		//Check for proper number of arguments
+		// Check for proper number of arguments
 		if (args.length != 1) {
 			System.out.println("The number of arguments are not valid");
 			System.exit(0);
@@ -86,22 +86,21 @@ public class Jumble {
 			Scanner userInput = new Scanner(System.in);
 			System.out.println("Enter your input String:");
 			String input = userInput.nextLine();
-			//Check if the input is not empty or null
+			// Check if the input is not empty or null
 			if (input.equalsIgnoreCase("") || input == null) {
 				System.out.println("Not a valid input");
 				System.exit(0);
 			} else {
-				//Check if the input is not a digit
+				// Check if the input is not a digit
 				for (int i = 0; i < input.length(); i++) {
-					if (((input.charAt(i) < 'a' && input.charAt(i) > 'z') || (input
-							.charAt(i) < 'A' && input.charAt(i) > 'Z'))) {
+					if (Character.isDigit(input.charAt(i))) {
 						System.out.println("Not a valid input");
 						System.exit(0);
 					}
 				}
 
 			}
-			//If valid input
+			// If valid input
 			userInput.close();
 			String result = "";
 			Set<String> wordSet = myJumbler.readFile(args[0]);
